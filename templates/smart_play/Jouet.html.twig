@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+ {% block body %}
+ <br><br>
+ <section class="games">
+ <table class="table">
+ <thread class="thread-dark">
+ <tr>
+ <th scope="col">Code jouet</th>
+ <th scope="col">Designation du jouet</th>
+ <th scope="col">Qte en stock</th>
+ <th scope="col">Pu en stock</th>
+ <th scope="col">Action</th>
+ </tr>
+ </thread>
+ <tbody>
+ <game>
+ <tr>
+ <th scope="row">{{game.getCodeJouet}}</th>
+<td>{{game.getDesJouet()}}</td>
+<td>{{game.getQteStockJouet()}} </td>
+<td>{{game.getPUJouet()}}</td>
+<td><a href="{{path('jouet-edit',{'id': game.id}) }}" class="btn btn-primary">Editer</a>
+ </td>
+ </tr>
+ </game>
+ </tbody>
+ </table>
+<a href="{{path('jouet-add') }}" class="btn btn-success">Ajouter un jouet</a>
+ </section>
+ {% endblock %}

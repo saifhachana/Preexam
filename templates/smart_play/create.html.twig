@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+{% form_theme formJouet 'bootstrap_4_layout.html.twig' %}
+
+
+{% block body %}
+{{form_start(formJouet)}}
+{{form_row(formJouet.code_jouet,{'attr':{'placeholder':"Code du jouet"}})}}
+{{form_row(formJouet.des_jouet,{'attr':{'placeholder':"Designation du jouet"}})}}
+{{form_row(formJouet.Qte_stock_jouet,{'attr':{'placeholder':"Qtite du stock reste"}})}}
+{{form_row(formJouet.pu_jouet,{'attr':{'placeholder':"Pu du jouet"}})}}
+{{form_row(formJouet.code_four_jouet,{'attr':{'placeholder':"Code du founisseur"}})}}
+{{form_end(formJouet)}}
+<button type="submit" class="btn btn-success">
+{% if editMode %}
+Valider
+{% else %}
+Ajouter
+{% endif %}
+</button>
+{% endblock %}
