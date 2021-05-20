@@ -2,7 +2,7 @@
  {% block body %}
  <br><br>
  <section class="games">
- <table class="table">
+ <table class="table table-striped">
  <thread class="thread-dark">
  <tr>
  <th scope="col">Code jouet</th>
@@ -13,19 +13,16 @@
  </tr>
  </thread>
  <tbody>
- {%for game in games %}
- <game>
+ {% for game in games %}
  <tr>
  <th scope="row">{{game.getCodeJouet}}</th>
 <td>{{game.getDesJouet()}}</td>
 <td>{{game.getQteStockJouet()}} </td>
 <td>{{game.getPUJouet()}}</td>
-
 <td><a href="{{path('jouet-edit',{'id': game.id}) }}" class="btn btn-primary">Editer</a>
 <a href="{{path('jouet-supp',{'id': game.id}) }}" class="btn btn-danger">Supprimer</a>
  </td>
  </tr>
- </game>
  {% endfor %}
  </tbody>
  </table>

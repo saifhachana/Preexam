@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+ {% block body %}
+ <br><br>
+ <section class="games">
+ <table class="table">
+ <thread class="thread-dark">
+ <tr>
+ <th scope="col">Code client</th>
+ <th scope="col">Numero commande</th>
+ <th scope="col">Date Commande</th>
+ <th scope="col">Heure Commande</th>
+ <th scope="col">Remise Commande</th>
+  <th scope="col">Montant Commande</th>
+  <th scope="col">Action</th>
+ </tr>
+ </thread>
+ <tbody>
+ <com>
+ <tr>
+ <th scope="row">{{com.getCodeCltCde}}</th>
+<td>{{com.getNumCde()}}</td>
+<td>{{com.getDateCde()|date('d-m-Y')}} </td>
+<td>{{com.getHeureCde()}}</td>
+<td>{{com.getRemiseCde()}}</td>
+<td>{{com.getMntCde()}}</td>
+<td><a href="{{path('Com-edit',{'id': com.id}) }}" class="btn btn-primary">Editer</a>
+<a href="{{path('Com-supp',{'id': com.id}) }}" class="btn btn-danger">Supprimer</a>
+ </td>
+
+ </tr>
+ </com>
+ </tbody>
+ </table>
+ </section>
+ {% endblock %}

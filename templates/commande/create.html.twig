@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+{% form_theme formCom 'bootstrap_4_layout.html.twig' %}
+
+
+{% block body %}
+{{form_start(formCom)}}
+{{form_row(formCom.num_cde,{'attr':{'placeholder':"Code du jouet"}})}}
+{{form_row(formCom.remise_cde,{'attr':{'placeholder':"Designation du jouet"}})}}
+{{form_row(formCom.mnt_cde,{'attr':{'placeholder':"Qtite du stock reste"}})}}
+{{form_row(formCom.code_clt_cde,{'attr':{'placeholder':"Pu du jouet"}})}}
+<button type="submit" class="btn btn-success">
+{{form_end(formCom)}}
+{% if editMode %}
+Valider
+{% else %}
+Ajouter
+{% endif %}
+</button>
+{% endblock %}
