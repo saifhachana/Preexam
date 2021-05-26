@@ -9,6 +9,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Fournisseur ;
 use App\Repository\FournisseurRepository;
+use App\Repository\JouetRepository;
 use App\Entity\Jouet ;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -167,6 +168,43 @@ class SmartPlayController extends AbstractController
         $manager->flush();
     
         return $this->redirectToRoute("Listejouet");
+    }
+
+      /**
+     * @Route("/Req1", name="Req1")
+     */
+    public function EduGame(JouetRepository $JouetRepository)
+    {
+        $jouets=$JouetRepository->findByFour(3);
+        $four=$this->getDoctrine()->getRepository(Jouet::class)->find(3);
+        return $this->render('pageac\test.html.twig',['controller_name'=>'SmartPlayController','jouets'=>$jouets,'four'=>$four]);
+    }
+     /**
+     * @Route("/Req2", name="Req2")
+     */
+    public function test2(JouetRepository $JouetRepository)
+    {
+        $jouets=$JouetRepository->findByPrice();
+       
+        return $this->render('pageac\liste.html.twig',['controller_name'=>'SmartPlayController','jouets'=>$jouets]);
+    }
+       /**
+     * @Route("/Req3", name="Req3")
+     */
+    public function test3(JouetRepository $JouetRepository)
+    {
+        $jouets=$JouetRepository->updatePrice();
+       
+        return $this->render('pageac\liste.html.twig',['controller_name'=>'SmartPlayController','jouets'=>$jouets]);
+    }
+       /**
+     * @Route("/Req4", name="Req4")
+     */
+    public function test4(JouetRepository $JouetRepository)
+    {
+        $jouets=$JouetRepository->delete();
+       
+        return $this->render('pageac\liste.html.twig',['controller_name'=>'SmartPlayController','jouets'=>$jouets]);
     }
 
 

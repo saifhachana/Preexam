@@ -4,10 +4,10 @@
 
 {% block body %}
 {{form_start(formCom)}}
-{{form_row(formCom.num_cde,{'attr':{'placeholder':"Code du jouet"}})}}
-{{form_row(formCom.remise_cde,{'attr':{'placeholder':"Designation du jouet"}})}}
-{{form_row(formCom.mnt_cde,{'attr':{'placeholder':"Qtite du stock reste"}})}}
-{{form_row(formCom.code_clt_cde,{'attr':{'placeholder':"Pu du jouet"}})}}
+{{form_row(formCom.num_cde,{'attr':{'placeholder':"Numero Commande"}})}}
+{{form_row(formCom.remise_cde,{'attr':{'placeholder':"Remise"}})}}
+{{form_row(formCom.mnt_cde,{'attr':{'placeholder':"Montant Commande"}})}}
+{{form_row(formCom.code_clt_cde,{'attr':{'label':"Nom Client"}})}}
 <button type="submit" class="btn btn-success">
 {{form_end(formCom)}}
 {% if editMode %}
