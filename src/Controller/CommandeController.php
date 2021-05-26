@@ -5,10 +5,11 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\FournisseurRepository;
 use App\Entity\Commande ;
+use App\Entity\Fournisseur;
+use App\Entity\Jouet;
 use DateTime;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -46,6 +47,7 @@ class CommandeController extends AbstractController
                    if($form->isSubmitted() && $form->isValid()){
                        if(!$Com->getId()){
                            $Com->setDateCde(new \DateTime());
+                           $Com->setHeureCde('H:i:s',new \DateTime());
                        }
                        $manager->persist($Com);
                        $manager->flush();

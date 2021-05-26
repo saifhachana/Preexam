@@ -17,19 +17,19 @@
  <tbody>
  <com>
  <tr>
- <th scope="row">{{com.getCodeCltCde}}</th>
+ <th scope="row">{{com.getCodeCltCde().getDesClt()}}</th>
 <td>{{com.getNumCde()}}</td>
 <td>{{com.getDateCde()|date('d-m-Y')}} </td>
 <td>{{com.getHeureCde()}}</td>
 <td>{{com.getRemiseCde()}}</td>
 <td>{{com.getMntCde()}}</td>
 <td><a href="{{path('Com-edit',{'id': com.id}) }}" class="btn btn-primary">Editer</a>
-<a href="{{path('Com-supp',{'id': com.id}) }}" class="btn btn-danger">Supprimer</a>
+<a href="{{path('UnCom',{'id': com.id}) }}" class="btn btn-success">Details</a>
  </td>
-
  </tr>
  </com>
  </tbody>
  </table>
+ <a href="{{path('Com-add') }}" class="btn btn-success">Ajouter une commande</a>
  </section>
  {% endblock %}
