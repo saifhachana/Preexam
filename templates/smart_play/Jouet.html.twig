@@ -9,6 +9,7 @@
  <th scope="col">Designation du jouet</th>
  <th scope="col">Qte en stock</th>
  <th scope="col">Pu en stock</th>
+ <th scope="col">Fournisseur</th>
  <th scope="col">Action</th>
  </tr>
  </thread>
@@ -19,6 +20,7 @@
 <td>{{game.getDesJouet()}}</td>
 <td>{{game.getQteStockJouet()}} </td>
 <td>{{game.getPUJouet()}}</td>
+<td>{{game.getCodeFourJouet().getDesFour()}}</td>
 <td><a href="{{path('jouet-edit',{'id': game.id}) }}" class="btn btn-primary">Editer</a>
  </td>
  </tr>

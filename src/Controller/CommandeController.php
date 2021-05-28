@@ -124,7 +124,7 @@ class CommandeController extends AbstractController
           $Cmd=$repo->find($idc);
           $Cmd->setMntCde($montf);
           $manager->persist($Cmd);
-                       $manager->flush();
+          $manager->flush();
                        return $this->redirectToRoute('LesLignes',['id'=>$idc]);
                     }
         return $this->render('commande/createLc.html.twig',[

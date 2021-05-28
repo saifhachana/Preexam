@@ -21,7 +21,7 @@ class SmartPlayController extends AbstractController
     /**
      * @Route("/smart_play", name="smart_play")
      */
-    public function index(JouetRepository $Jouetrep): Response
+    public function index(): Response
     {
         $repo = $this->getDoctrine()->getRepository(Jouet::class);
         $games = $repo->findAll();
@@ -37,7 +37,7 @@ class SmartPlayController extends AbstractController
      * @Route("/Requests")
      */
     public function requests(JouetRepository $Jouetrep,FournisseurRepository $Fourrep){
-        $Jouetrep->Req5();
+        //$Jouetrep->Req5();
         //$Jouetrep->Req6();
         //$Fourrep->Req6();
         return $this->render('smart_play/Requests.html.twig', [
@@ -80,16 +80,16 @@ class SmartPlayController extends AbstractController
         $fourn = $this->repfour->find(2) ;
         $jouet->setCodeJouet("1")
             ->setDesJouet("Camionnette Lego")
-            ->setQteStockJouet("130")
-            ->setPUJouet("20000")
+            ->setQteStockJouet(130)
+            ->setPUJouet(20000)
             ->setCodeFourJouet($fourn) ;
         $entityManager->persist($jouet) ;
         $jouet = new Jouet() ;
         $fourn = $this->repfour->find(2) ;
         $jouet->setCodeJouet("2")
             ->setDesJouet("Voiture télécommandée")
-            ->setQteStockJouet("120")
-            ->setPUJouet("45.400")
+            ->setQteStockJouet(120)
+            ->setPUJouet(45.400)
             ->setCodeFourJouet($fourn) ;
             $entityManager->persist($jouet) ;
         $jouet = new Jouet() ;
@@ -104,16 +104,16 @@ class SmartPlayController extends AbstractController
         $fourn = $this->repfour->find(3) ;
         $jouet->setCodeJouet("4")
             ->setDesJouet("Scrabble")
-            ->setQteStockJouet("270")
-            ->setPUJouet("32.000")
+            ->setQteStockJouet(270)
+            ->setPUJouet(32.000)
             ->setCodeFourJouet($fourn) ;
             $entityManager->persist($jouet) ;
         $jouet = new Jouet() ;
         $fourn = $this->repfour->find(3) ;
         $jouet->setCodeJouet("5")
             ->setDesJouet("Monopoly")
-            ->setQteStockJouet("300")
-            ->setPUJouet("34.600")
+            ->setQteStockJouet(300)
+            ->setPUJouet(34.600)
             ->setCodeFourJouet($fourn) ;
             $entityManager->persist($jouet) ;
             $entityManager->flush() ;
