@@ -18,6 +18,13 @@ class FournisseurRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Fournisseur::class);
     }
+    public function Req6(){
+        $queryBuilder = $this->createQueryBuilder('f');
+$queryBuilder->delete()
+    ->where('f.code_four = 3')
+    ->getQuery()
+    ->execute();
+    }
 
     // /**
     //  * @return Fournisseur[] Returns an array of Fournisseur objects

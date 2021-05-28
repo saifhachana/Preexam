@@ -48,7 +48,7 @@ class CommandeController extends AbstractController
                    if($form->isSubmitted() && $form->isValid()){
                        if(!$Com->getId()){
                            $Com->setDateCde(new \DateTime());
-                           $Com->setHeureCde('H:i:s',new \DateTime());
+                           $Com->setHeureCde(date("H:i:s", strtotime('+1 hours')));
                        }
                        $manager->persist($Com);
                        $manager->flush();

@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<h3>Requete numero 1 : </h3>
+{% for R in Req1 %}
+<p>{{R.des_jouet}}</p>
+{% endfor %}
+<h3>Requete numero 2 : </h3>
+{% for R in Req2 %}
+<p>{{R.des_jouet}}</p>
+{% endfor %}
+<h3>Requete numero 3 : </h3>
+{% for R in Req3 %}
+<p>{{R.des_jouet}}</p>
+{% endfor %}
+
+{% endblock %}

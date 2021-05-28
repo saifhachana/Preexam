@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Fournisseur ;
 use App\Repository\FournisseurRepository;
 use App\Entity\Jouet ;
+use App\Repository\JouetRepository;
 
 class SmartPlayController extends AbstractController
 {
@@ -20,14 +21,31 @@ class SmartPlayController extends AbstractController
     /**
      * @Route("/smart_play", name="smart_play")
      */
-    public function index(): Response
+    public function index(JouetRepository $Jouetrep): Response
     {
         $repo = $this->getDoctrine()->getRepository(Jouet::class);
         $games = $repo->findAll();
+        
+    
  
         return $this->render('smart_play/index.html.twig', [
             'controller_name' => 'SmartPlayController',
             'games' =>$games
+        ]);
+    }
+    /**
+     * @Route("/Requests")
+     */
+    public function requests(JouetRepository $Jouetrep,FournisseurRepository $Fourrep){
+        $Jouetrep->Req5();
+        //$Jouetrep->Req6();
+        //$Fourrep->Req6();
+        return $this->render('smart_play/Requests.html.twig', [
+            'controller_name' => 'SmartPlayController',
+            'Req1' =>$Jouetrep->Req1(),
+            'Req2'=>$Jouetrep->Req2(),
+            'Req3'=>$Jouetrep->Req3(),
+            
         ]);
     }
     
