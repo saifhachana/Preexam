@@ -30,12 +30,12 @@ class Jouet
     private $des_jouet;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=50)
      */
     private $qte_stock_jouet;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="integer", length=50)
      */
     private $PU_jouet;
 
@@ -84,24 +84,24 @@ class Jouet
         return $this;
     }
 
-    public function getQteStockJouet(): ?string
+    public function getQteStockJouet(): ?int
     {
         return $this->qte_stock_jouet;
     }
 
-    public function setQteStockJouet(string $qte_stock_jouet): self
+    public function setQteStockJouet(int $qte_stock_jouet): self
     {
         $this->qte_stock_jouet = $qte_stock_jouet;
 
         return $this;
     }
 
-    public function getPUJouet(): ?string
+    public function getPUJouet(): ?int
     {
         return $this->PU_jouet;
     }
 
-    public function setPUJouet(string $PU_jouet): self
+    public function setPUJouet(int $PU_jouet): self
     {
         $this->PU_jouet = $PU_jouet;
 

@@ -67,7 +67,8 @@ class CommandeController extends AbstractController
     public function Add($id,Request $requet){
         $repo=$this->getDoctrine()->getRepository(Commande::class);
         $manager = $this->getDoctrine()->getManager();
-        
+        $repo1=$this->getDoctrine()->getRepository(LigneCde::class);
+        $montf=0;
             $LC = new LigneCde();
         
       $form = $this->createFormBuilder($LC)
@@ -78,8 +79,19 @@ class CommandeController extends AbstractController
                    $form->handleRequest($requet);
                    if($form->isSubmitted() && $form->isValid()){
                     $LC->setNumCdeLigne($repo->find($id));
+                    
                        $manager->persist($LC);
                        $manager->flush();
+
+        $jou=$repo1->findBy(['num_cde_ligne'=>$id]);
+        foreach ($jou as $value) {
+            $montf+=$value->getCodeJouetLigne()->getPUJouet()*$value->getQteLigne();
+          }
+          $Cmd=$repo->find($id);
+          $Cmd->setMntCde($montf);
+          $manager->persist($Cmd);
+                       $manager->flush();
+            
                        return $this->redirectToRoute('LesLignes',['id'=>$id]);
                     }
         return $this->render('commande/createLc.html.twig',[
@@ -91,8 +103,10 @@ class CommandeController extends AbstractController
      * @Route("/smart_play/list_commande/Lignes/edit/{idc}/{id}", name = "Ligne-edit")
      */
     public function Edit($idc,$id,LigneCde $LC,Request $requet){
+        $repo=$this->getDoctrine()->getRepository(Commande::class);
         $manager = $this->getDoctrine()->getManager();
-
+        $repo1=$this->getDoctrine()->getRepository(LigneCde::class);
+        $montf=0;
       $form = $this->createFormBuilder($LC)
                    ->add('code_jouet_ligne')
                    ->add('qte_ligne')
@@ -100,7 +114,16 @@ class CommandeController extends AbstractController
                    ->getForm();
                    $form->handleRequest($requet);
                    if($form->isSubmitted() && $form->isValid()){
+
                        $manager->persist($LC);
+                       $manager->flush();
+                       $jou=$repo1->findBy(['num_cde_ligne'=>$idc]);
+        foreach ($jou as $value) {
+            $montf+=$value->getCodeJouetLigne()->getPUJouet()*$value->getQteLigne();
+          }
+          $Cmd=$repo->find($idc);
+          $Cmd->setMntCde($montf);
+          $manager->persist($Cmd);
                        $manager->flush();
                        return $this->redirectToRoute('LesLignes',['id'=>$idc]);
                     }
@@ -115,10 +138,21 @@ class CommandeController extends AbstractController
      * @param LigneCde $LC
      * @return Response
      */
-    public function suppr(LigneCde $LC,$idc){
-        $manager=$this->getDoctrine()->getManager();
+    public function supprL(LigneCde $LC,$idc){
+        $repo=$this->getDoctrine()->getRepository(Commande::class);
+        $manager = $this->getDoctrine()->getManager();
+        $repo1=$this->getDoctrine()->getRepository(LigneCde::class);
+        $montf=0;
         $manager->remove($LC);
-        $manager->flush();
+          $manager->flush();
+          $jou=$repo1->findBy(['num_cde_ligne'=>$idc]);
+        foreach ($jou as $value) {
+            $montf+=$value->getCodeJouetLigne()->getPUJouet()*$value->getQteLigne();
+          }
+          $Cmd=$repo->find($idc);
+          $Cmd->setMntCde($montf);
+          $manager->persist($Cmd);
+                       $manager->flush();
     
         return $this->redirectToRoute('LesLignes',['id'=>$idc]);
     }
@@ -127,8 +161,14 @@ class CommandeController extends AbstractController
      * @param Commande $Com
      * @return Response
      */
-    public function supprL(Commande $Com, Request $request){
+    public function suppr(Commande $Com){
         $manager=$this->getDoctrine()->getManager();
+        $repo1=$this->getDoctrine()->getRepository(LigneCde::class);
+        $jou=$repo1->findBy(['num_cde_ligne'=>$Com->getId()]);
+        foreach ($jou as $value) {
+            $manager->remove($value);
+          }
+
         $manager->remove($Com);
         $manager->flush();
     
