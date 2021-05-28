@@ -23,16 +23,13 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/smart_play">Partenaires </a>
+        <a class="nav-link {% if app.request.attributes.get('_route') == 'smart_play' %} active {% endif %}" href="/smart_play">Partenaires</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/smart_play/Jouet">Liste des Jouets</a>
+        <a class="nav-link{% if app.request.attributes.get('_route') == 'Listejouet' %} active {% endif %}" href="/smart_play/Jouet">Liste des Jouets</a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="/smart_play/list_commande">Liste des Commandes </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link {% if app.request.attributes.get('_route') == 'listcommande' %} active {% endif %}" href="/smart_play/list_commande">Liste des Commandes </a>
       </li>
     </ul>
     <span class="navbar-text">
