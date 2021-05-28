@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+{% form_theme formL 'bootstrap_4_layout.html.twig' %}
+
+
+{% block body %}
+{{form_start(formL)}}
+{{form_row(formL.code_jouet_ligne,{'attr':{'placeholder':"Le Code du jouet"}})}}
+{{form_row(formL.qte_ligne,{'attr':{'placeholder':"Qte a achetée"}})}}
+{{form_row(formL.remise_ligne,{'attr':{'placeholder':"Remise"}})}}
+<button type="submit" class="btn btn-success">
+{{form_end(formL)}}
+{% if editMode %}
+Valider
+{% else %}
+Ajouter
+{% endif %}
+</button>
+{% endblock %}

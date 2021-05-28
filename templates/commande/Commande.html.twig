@@ -1,5 +1,6 @@
 {% extends "base.html.twig" %}
  {% block body %}
+ <h2>Commande : </h2>
  <br><br>
  <section class="games">
  <table class="table">
@@ -11,7 +12,6 @@
  <th scope="col">Heure Commande</th>
  <th scope="col">Remise Commande</th>
   <th scope="col">Montant Commande</th>
-  <th scope="col">Action</th>
  </tr>
  </thread>
  <tbody>
@@ -23,13 +23,49 @@
 <td>{{com.getHeureCde()}}</td>
 <td>{{com.getRemiseCde()}}</td>
 <td>{{com.getMntCde()}}</td>
-<td><a href="{{path('Com-edit',{'id': com.id}) }}" class="btn btn-primary">Editer</a>
-<a href="{{path('UnCom',{'id': com.id}) }}" class="btn btn-success">Details</a>
  </td>
  </tr>
  </com>
  </tbody>
  </table>
- <a href="{{path('Com-add') }}" class="btn btn-success">Ajouter une commande</a>
  </section>
+
+
+
+ <h2>Lignes des Commandes : </h2>
+ <br><br>
+  <section class="ligne">
+ <table class="table">
+ <thread class="thread-dark">
+ <tr>
+ <th scope="col">Les Jouets</th>
+ <th scope="col">Prix Unitaire</th>
+ <th scope="col">Qtité Acheté</th>
+  <th scope="col">Remise</th>
+  <th scope="col">Action</th>
+ </tr>
+ </thread>
+ <tbody>
+  {% for Li in Ligne %}
+ <com>
+ <tr>
+ <th scope="row">{{Li.getCodeJouetLigne().getDesJouet()}}</th>
+ <td>{{Li.getCodeJouetLigne().getPUJouet()}}</td>
+<td>{{Li.getQteLigne()}}</td>
+<td>{{Li.getRemiseLigne()}}</td>
+ <td><a href="{{path('Ligne-edit',{'idc': com.id,'id': Li.id}) }}" class="btn btn-primary">Editer</a>
+ <a href="{{path('Ligne-supp',{'idc': com.id,'id': Li.id},) }}" class="btn btn-danger">Supprimer</a>
+</td>
+ </tr>
+ </com>
+  {% endfor %}
+ </tbody>
+ </table>
+ <a href="{{path('Ligne-add',{'id':com.id}) }}" class="btn btn-success">Ajouter une ligne</a>
+<a href="{{path('listcommande') }}" class="btn btn-primary">Retourner au liste des commandes</a>
+ </section>
+
+
+
+  
  {% endblock %}

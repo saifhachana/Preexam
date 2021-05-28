@@ -15,7 +15,7 @@
  </tr>
  </thread>
  <tbody>
- {%for com in coms %}
+ {% for com in coms %}
  <com>
  <tr>
  <th scope="row">{{com.getCodeCltCde().getDesClt()}}</th>
@@ -25,7 +25,7 @@
 <td>{{com.getRemiseCde()}}</td>
 <td>{{com.getMntCde()}}</td>
 <td><a href="{{path('Com-edit',{'id': com.id}) }}" class="btn btn-primary">Editer</a>
-<a href="{{path('UnCom',{'id': com.id}) }}" class="btn btn-success">Détails</a>
+<a href="{{path('LesLignes',{'id': com.id}) }}" class="btn btn-success">Détails</a>
  </td>
 
  </tr>

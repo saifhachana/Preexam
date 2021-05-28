@@ -10,6 +10,7 @@ use App\Repository\FournisseurRepository;
 use App\Entity\Commande ;
 use App\Entity\Fournisseur;
 use App\Entity\Jouet;
+use App\Entity\LigneCde;
 use DateTime;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -19,7 +20,7 @@ class CommandeController extends AbstractController
      * @Route("/smart_play/list_commande", name="listcommande")
      */
 
-    public function Jouet(){
+    public function ListCommande(){
         $repo = $this->getDoctrine()->getRepository(Commande::class);
         $coms = $repo->findAll();
         return $this->render('commande/Commandes.html.twig', [
@@ -51,7 +52,7 @@ class CommandeController extends AbstractController
                        }
                        $manager->persist($Com);
                        $manager->flush();
-                       return $this->redirectToRoute('UnCom',['id'=>$Com->getId()]);
+                       return $this->redirectToRoute('LesLignes',['id'=>$Com->getId()]);
 
                    }
         return $this->render('commande/create.html.twig', [
@@ -61,21 +62,72 @@ class CommandeController extends AbstractController
 
     }
      /**
-     * @Route("/smart_play/list_commande/{id}", name = "UnCom")
+     * @Route("/smart_play/list_commande/Lignes/new/{id}", name = "Ligne-add") 
      */
-    public function show($id){
+    public function Add($id,Request $requet){
         $repo=$this->getDoctrine()->getRepository(Commande::class);
-        $Com=$repo->find($id);
-        return $this->render('commande/Commande.html.twig',[
-           'com'=>$Com
+        $manager = $this->getDoctrine()->getManager();
+        
+            $LC = new LigneCde();
+        
+      $form = $this->createFormBuilder($LC)
+                   ->add('code_jouet_ligne')
+                   ->add('qte_ligne')
+                   ->add('remise_ligne')
+                   ->getForm();
+                   $form->handleRequest($requet);
+                   if($form->isSubmitted() && $form->isValid()){
+                    $LC->setNumCdeLigne($repo->find($id));
+                       $manager->persist($LC);
+                       $manager->flush();
+                       return $this->redirectToRoute('LesLignes',['id'=>$id]);
+                    }
+        return $this->render('commande/createLc.html.twig',[
+            'formL'=>$form->createView(),
+            'editMode'=>$LC->getId()!==null
         ]);
     }
+       /**
+     * @Route("/smart_play/list_commande/Lignes/edit/{idc}/{id}", name = "Ligne-edit")
+     */
+    public function Edit($idc,$id,LigneCde $LC,Request $requet){
+        $manager = $this->getDoctrine()->getManager();
+
+      $form = $this->createFormBuilder($LC)
+                   ->add('code_jouet_ligne')
+                   ->add('qte_ligne')
+                   ->add('remise_ligne')
+                   ->getForm();
+                   $form->handleRequest($requet);
+                   if($form->isSubmitted() && $form->isValid()){
+                       $manager->persist($LC);
+                       $manager->flush();
+                       return $this->redirectToRoute('LesLignes',['id'=>$idc]);
+                    }
+        return $this->render('commande/createLc.html.twig',[
+            'formL'=>$form->createView(),
+            'editMode'=>$LC->getId()!==null
+        ]);
+    }
+    
     /**
+     * @Route("/smart_play/list_commande/Supprimer/Lignes/{idc}/{id}", name = "Ligne-supp")
+     * @param LigneCde $LC
+     * @return Response
+     */
+    public function suppr(LigneCde $LC,$idc){
+        $manager=$this->getDoctrine()->getManager();
+        $manager->remove($LC);
+        $manager->flush();
+    
+        return $this->redirectToRoute('LesLignes',['id'=>$idc]);
+    }
+      /**
      * @Route("/smart_play/list_commande/Supprimer/{id}", name = "Com-supp")
      * @param Commande $Com
      * @return Response
      */
-    public function suppr(Commande $Com, Request $request){
+    public function supprL(Commande $Com, Request $request){
         $manager=$this->getDoctrine()->getManager();
         $manager->remove($Com);
         $manager->flush();
@@ -83,7 +135,29 @@ class CommandeController extends AbstractController
         return $this->redirectToRoute("listcommande");
     }
 
+    /**
+     * @Route("/smart_play/list_commande/Lignes/{id}", name="LesLignes")
+     */
+    public function Lignes($id){
+        $repo = $this->getDoctrine()->getRepository(Commande::class);
+        $coms = $repo->find($id);
+        $repo = $this->getDoctrine()->getRepository(LigneCde::class);
+        $Ligne = $repo->findBy(['num_cde_ligne'=>$id]);
+        return $this->render('commande/Commande.html.twig', [
+            'controller_name' => 'CommandeController',
+            'com' =>$coms,
+            'Ligne'=>$Ligne]);
+    }
+
+
+
+
+
+
+     
+
 
    
-    }
+}
+
 
